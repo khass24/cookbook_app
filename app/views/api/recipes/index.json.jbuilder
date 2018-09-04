@@ -1,3 +1,4 @@
+
 json.array! @recipes.each do |recipe|
   json.id recipe.id
   json.title recipe.title
@@ -7,5 +8,11 @@ json.array! @recipes.each do |recipe|
   json.directions recipe.directions
   json.image_url recipe.image_url
   json.link "http://localhost:3000/api/recipes/#{recipe.id}"
-  json.created_at recipe.created_at.strftime("%b %e, %l:%M %p")
+
+  json.formatted do
+    json.created_at recipe.friendly_created_at
+    json.prep_time recipe.friendly_prep_time
+    json.ingredients recipe.ingredients_list
+    json.directions recipe.directions_list
+  end
 end
